@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>使用Hexo快速搭建博客,并部署到GitHub上,踩坑必看(小白篇)</title>
+    <url>/2020/03/31/hexoGit/</url>
+    <content><![CDATA[<h1 id="写此文目的"><a href="#写此文目的" class="headerlink" title="写此文目的"></a>写此文目的</h1><ol>
+<li>看了很多大神前辈写的Hexo搭建教程,也踩了许多坑,想自己也写一个小白点的教程给琢磨尝试很久都未成功的朋友看</li>
+<li>也能使自己在以后的使用过程中能够快速学习和参考</li>
+</ol>
+<h2 id="Hexo官方文档"><a href="#Hexo官方文档" class="headerlink" title="Hexo官方文档"></a>Hexo官方文档</h2><ul>
+<li><a href="https://hexo.io/zh-cn/docs/" target="_blank" rel="noopener">Hexo</a></li>
+</ul>
+<h3 id="安装前提-必要-前端朋友应该都安装了"><a href="#安装前提-必要-前端朋友应该都安装了" class="headerlink" title="安装前提(必要,前端朋友应该都安装了)"></a>安装前提(必要,前端朋友应该都安装了)</h3><ol>
+<li><p><a href="https://nodejs.org/en/" target="_blank" rel="noopener">Node.js</a><br>查看是否安装好</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">node -v</span><br></pre></td></tr></table></figure>
+<p>显示版本号说明已经安装成功了</p>
+</li>
+<li><p><a href="https://git-scm.com/" target="_blank" rel="noopener">Git</a></p>
+</li>
+<li><p>其他不多说 打开cmd命令 也可以用Git Bash (个人喜好使用cmd觉得方便)</p>
+</li>
+</ol>
+<h3 id="开始安装Hexo"><a href="#开始安装Hexo" class="headerlink" title="开始安装Hexo"></a>开始安装Hexo</h3><ol>
+<li>npm下载<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm i -g hexo-cli</span><br></pre></td></tr></table></figure></li>
+<li>新建文件夹 打开cmd命令 此操作可以直接获得路径不需要cd各种找路径,也可以在新建文件夹里右键 打开git bash<br><img src="/" class="lazyload" data-src="/img/text1/cmd.png"  alt="打开cmd"></li>
+<li>在cmd里面输入<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo init &#x2F;&#x2F;初始化安装hexo博客</span><br><span class="line">npm i &#x2F;&#x2F;下载hexo依赖包</span><br></pre></td></tr></table></figure></li>
+<li>安装完后,此时hexo已经本地搭建好了<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo server &#x2F;&#x2F;启动服务,默认端口4000 启动成功后 打开http:&#x2F;&#x2F;localhost:4000 就能查看到了 </span><br><span class="line">hexo server -p 4001  &#x2F;&#x2F;如果4000端口被占用 可使用4001等空闲端口</span><br><span class="line">hexo  clean &#x2F;&#x2F;清除缓存,在页面显示不正常的时候可以执行此命令</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h3 id="部署到github上-为了不买服务器"><a href="#部署到github上-为了不买服务器" class="headerlink" title="部署到github上(为了不买服务器)"></a>部署到github上(为了不买服务器)</h3><ol>
+<li><p>第一步当然是注册了 <a href="https://github.com/" target="_blank" rel="noopener">GitHub官网</a> 注册后登陆进去点 <strong>+</strong> 图标<br><img src="/" class="lazyload" data-src="img/text1/git+.png"  alt="创建库"></p>
+</li>
+<li><p>Github账户注册和新建项目，项目必须要遵守格式：<strong>账户名.github.io(名字不能随意取这个很重要)</strong> 看下图例子</p>
+<p><img src="/" class="lazyload" data-src="/img/text1/git_name.png"  alt="创建仓库名字"></p>
+</li>
+<li><p>找到创建的库 进入setting<br><img src="/" class="lazyload" data-src="/img/text1/gitseting.png"  alt="进入setting"></p>
+</li>
+<li><p>进入setting后 往下翻 找到<strong>GitHub Pages</strong></p>
+</li>
+<li><p>这个链接就是你博客的链接啦<br><img src="/" class="lazyload" data-src="/img/text1/git_page.png"  alt="你的链接"></p>
+</li>
+<li><p>将Hexo与Github page联系起来，设置Git的user name和email（如果是第一次的话）</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git config -g user.name&#39;你的笔名&#39;</span><br><span class="line">git config -g user.email&#39;你的邮箱@qq.com&#39;</span><br></pre></td></tr></table></figure></li>
+<li><p>输入ssh-keygen -t rsa -C “你的邮箱@qq.com”，连续三个回车，生成密钥，最后得到了两个文件：<strong>一个私钥（id_rsa）、一个公钥（id_rsa.pub）</strong>（默认存储路径是：C:\Users\Administrator.ssh）。 在文件夹中使用记事本方式打开<strong>公钥（id_rsa.pub）</strong> 复制全部内容</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa -C “你的邮箱@qq.com”</span><br></pre></td></tr></table></figure></li>
+<li><p>回到GitHub 刚刚设置setting那个页面<br><img src="/" class="lazyload" data-src="/img/text1/git_key.png"  alt="key"></p>
+</li>
+<li><p>点击New SSH Key 创建一个 SSH Keys </p>
+</li>
+<li><p>title 随意填 key就是刚刚复制的<strong>id_rsa.pub</strong>内容</p>
+</li>
+<li><p>输入ssh -T <a href="mailto:git@github.com">git@github.com</a>，测试添加ssh是否成功。如果看到Hi后面是你的用户名，就说明成功了</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ssh -T git@github.com</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>最后在hexo文件夹里找到<strong>_config.yml</strong> 配置已下内容 记得把我的地址改成你自己的github地址</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">deploy:</span><br><span class="line">    type: git</span><br><span class="line">    repository: https:&#x2F;&#x2F;github.com&#x2F;qnone-x&#x2F;qnone-x.github.io.git</span><br><span class="line">    branch: master</span><br></pre></td></tr></table></figure></li>
+<li><p>输入hexo命令 </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo -g  &#x2F;&#x2F; 生成静态文件</span><br><span class="line">hexo -d  &#x2F;&#x2F; 提交到GitHub上</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>因为毕竟是搭建在GitHub上(免费) 缓存时间会相对久一些 部署上去后大概要过几分钟才能更新好,进行观看</p>
+</li>
+<li><p>此教程到此就结束了,还有问题可以联系我,感谢收看<strong>青柠博客</strong> 喜欢记得收藏</p>
+</li>
+</ol>
+<h3 id="安装好hexo后-可以自己找主题下载使用"><a href="#安装好hexo后-可以自己找主题下载使用" class="headerlink" title="安装好hexo后 可以自己找主题下载使用"></a>安装好hexo后 可以自己找主题下载使用</h3><ol>
+<li>本人使用的是<strong><a href="https://jerryc.me/" target="_blank" rel="noopener">Butterfly</a></strong>这个主题 ,喜欢的可以参考一下</li>
+</ol>
+]]></content>
+      <tags>
+        <tag>Hexo搭建</tag>
+        <tag>GitHub免费部署</tag>
+      </tags>
+  </entry>
+</search>
